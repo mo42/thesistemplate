@@ -1,11 +1,12 @@
-LATEX = pdflatex
+LATEX = pdflatex -interaction nonstopmode
 BIBER = biber
 MAIN = main
+REF = references
 
-$(MAIN).pdf $(MAIN).bcf: $(MAIN).tex $(MAIN).bbl
+$(MAIN).pdf: $(MAIN).tex $(MAIN).bbl
 	$(LATEX) $(MAIN).tex
 
-$(MAIN).bbl: $(MAIN).bcf
+$(MAIN).bbl: $(MAIN).bcf $(REF).bib
 	$(BIBER) $(MAIN)
 
 $(MAIN).bcf: $(MAIN).tex
