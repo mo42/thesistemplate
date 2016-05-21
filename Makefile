@@ -1,9 +1,10 @@
 LATEX = pdflatex -interaction nonstopmode
-BIBER = biber
+BIBER = bibtex
+#BIBER = biber
 MAIN = main
 REF = references
 
-$(MAIN).pdf: $(MAIN).tex $(MAIN).bbl
+$(MAIN).pdf: $(MAIN).tex $(MAIN).bbl $(MAIN).toc $(MAIN).lof $(MAIN).loa
 	$(LATEX) $(MAIN).tex
 
 $(MAIN).bbl: $(MAIN).bcf $(REF).bib
@@ -12,15 +13,23 @@ $(MAIN).bbl: $(MAIN).bcf $(REF).bib
 $(MAIN).bcf: $(MAIN).tex
 	$(LATEX) $(MAIN).tex
 
+$(MAIN).toc $(MAIN).lof $(MAIN).loa: $(MAIN).tex
+	$(LATEX) $(MAIN).tex
+
 .PHONY: clean
 clean:
 	rm -f $(MAIN).aux
-	rm -r $(MAIN).bcf
-	rm -r $(MAIN).idx
-	rm -r $(MAIN).loa
-	rm -r $(MAIN).lof
-	rm -r $(MAIN).log
-	rm -r $(MAIN).lot
-	rm -r $(MAIN).out
-	rm -r $(MAIN).run.xml
-	rm -r $(MAIN).toc
+	rm -f $(MAIN).bcf
+	rm -f $(MAIN).bbl
+	rm -f $(MAIN).blg
+	rm -f $(MAIN).idx
+	rm -f $(MAIN).loa
+	rm -f $(MAIN).lof
+	rm -f $(MAIN).log
+	rm -f $(MAIN).lot
+	rm -f $(MAIN).out
+	rm -f $(MAIN).run.xml
+	rm -f $(MAIN).toc
+
+commit: clean
+	rm -f main.pdf

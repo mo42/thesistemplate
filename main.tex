@@ -9,7 +9,8 @@
 \usepackage[ngerman]{babel}
 \usepackage{lipsum}
 \usepackage{csquotes}
-\usepackage[backend=biber,
+%\usepackage[backend=biber,
+\usepackage[backend=bibtex,
             natbib=true,
             style=alphabetic,
             backref=true,
@@ -55,7 +56,7 @@
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
 \usepackage[all]{hypcap}
-\usepackage[title={Pferdehandel},
+\usepackage[title={Title},
             author={Michael Kohlhaas},
             type=bachelor,
             institute=fmi,
@@ -92,7 +93,7 @@
 \makeindex
 
 \makeatletter
-\hypersetup{pdftitle={Pferdehandel},
+\hypersetup{pdftitle={Titel},
             pdfauthor={Michael Kohlhaas},
             pdfkeywords={},
             pdfsubject={}
@@ -127,7 +128,7 @@
 \lipsum
 
 \chapter{Hauptteil}
-\lipsum
+\lipsum\autocite{turing1936}
 
 \chapter{Zusammenfassung}
 \lipsum
