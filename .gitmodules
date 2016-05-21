@@ -1,0 +1,3 @@
+[submodule "uni-stuttgart-computer-science-cover"]
+	path = uni-stuttgart-computer-science-cover
+	url = git://github.com/latextemplates/uni-stuttgart-computer-science-cover.git
