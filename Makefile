@@ -1,6 +1,5 @@
 LATEX = pdflatex -interaction nonstopmode
-BIBER = bibtex
-#BIBER = biber
+BIBER = biber
 MAIN = main
 REF = references
 
