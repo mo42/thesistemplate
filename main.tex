@@ -1,92 +1,143 @@
-\documentclass[paper=a4,
-               twoside,
-               bibliography=totoc,
-               cleardoublepage=empty,
-               parskip=half,
-               final]{scrbook}
-\usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
-\usepackage[T1]{fontenc}
+\documentclass[%
+  a4paper,%
+  twoside,%
+  listof = totoc,%
+  bibliography = totoc,%
+  headsepline,%
+  cleardoublepage = empty,%
+  parskip = half%
+]{scrbook}
+\usepackage[utf8]{luainputenc}
+\usepackage[english,ngerman]{babel}
+\usepackage{fontspec}
+
+\usepackage[hyperref,dvipsnames]{xcolor}
 \usepackage{lipsum}
 
 \usepackage{csquotes}
-\usepackage[backend=biber,
-            natbib=true,
-            style=alphabetic,
-            backref=true,
-            backrefstyle=three+,
-            block=space,
-            maxnames=12]{biblatex}
+\usepackage[automark]{scrlayer-scrpage}
+\usepackage[%
+  decimalsymbol = comma,%
+  binary-units = true%
+]{siunitx}
 
-\usepackage[title={Title},
-            author={Michael Kohlhaas},
-            type=bachelor,
-            institute=fmi,
-            number=42,
-            course=cs,
-            examiner={Prof.\ Dr.\ Wenzel von Tronka},
-            supervisor={Dipl.-Inf.\ Hinz von Tronka},
-            startdate={1.\ April 2015},
-            enddate={31.\ Oktober 2015},
-            crk={},
-            language=german]{uni-stuttgart-cs-cover/uni-stuttgart-cs-cover}
-\addbibresource{references.bib}
-\setlength{\bibitemsep}{1em}
-\DefineBibliographyStrings{german}{
-  backrefpage  = {Zitiert auf Seite},
-  backrefpages = {Zitiert auf Seiten}
+\usepackage[%
+  backend = biber,%
+  sortcites = true,%
+  bibstyle = alphabetic,%
+  citestyle = alphabetic,%
+  giveninits = true,%
+  useprefix = true,%
+  minnames = 1,%
+  minalphanames = 3,%
+  maxalphanames = 4,%
+  maxbibnames = 99,%
+  maxcitenames = 3,%
+  natbib = true,%
+  eprint = true,%
+  backref = true%
+]{biblatex}
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+\bibliography{bibliography}
+\DefineBibliographyStrings{ngerman}{
+  backrefpage  = {zitiert auf S\adddot},
+  backrefpages = {zitiert auf S\adddot},
+  andothers    = {et\ \addabbrvspace al\adddot},
+  bibliography = {Literaturverzeichnis}
 }
+\setlength\bibitemsep{2\itemsep}
 
-\usepackage{hyperref}
-\hypersetup{pdftitle={Titel},
-            pdfsubject={}
-            pdfauthor={Michael Kohlhaas},
-            pdfkeywords={},
-            pdfcreator={},
-            pdfproducer = {LaTeX with hyperref}.
-}
+% This package enables micro-typographic extensions.
+\usepackage{microtype}
 
-\usepackage{scrpage2}
-\pagestyle{scrheadings}
-
-\addto\captionsngerman{\renewcommand\abstractname{Abstract}}
-
-\setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
 
-\makeindex
+% Allow '\\' on the title page
+\usepackage{kvoptions-patch}
+% The package helps to design the title page.
+\usepackage[
+  title = {Titel},%
+  author = {Max Musterstudent},%
+  type = master,%
+  institute = fmi,%
+  course = cs,%
+  examiner = {Prof.\ Dr.\ Max Musterprofessor},%
+  supervisor = {Dr.\ Max Musterbetreuer},%
+  startdate = {1.\ Januar 2018},%
+  language = german,%
+  enddate = {1.\ Juli 2018}%
+]{uni-stuttgart-cs-cover/scientific-thesis-cover}
 
+% The hyperref package facilitates the creation of PDF documents and allows to
+% create links inside the PDF document. This package should be loaded last but
+% before the geometry package.
+\usepackage{hyperref}
+\hypersetup{%
+  pdftitle = {Titel},%
+  pdfauthor = {Max Musterstudent},%
+  breaklinks = true,%
+  bookmarksnumbered = true,%
+  bookmarksopen = true,%
+  bookmarksopenlevel = 1,%
+  breaklinks = true,%
+  pdfstartview = Fit,%
+  pdfpagelayout = SinglePage,%
+  filecolor = darkblue,%
+  colorlinks = false,%
+}
+
+% The geometry package allows the user to change the page layout. This package
+% should be loaded last.
+\usepackage[%
+  left = 3cm,%
+  right = 3cm,%
+  top = 2.5cm,%
+  bottom = 2.5cm,%
+  headsep = 18pt,%
+  footskip = 30pt,%
+  includehead,%
+  includefoot%
+]{geometry}
+
+\addto\captionsngerman{\renewcommand\abstractname{Kurzfassung}}
 \begin{document}
 \pagenumbering{roman}
 \Titelblatt
 
-\section*{Zusammenfassung}
+%Eigener Seitenstil fuer die Kurzfassung und das Inhaltsverzeichnis
+\deftriplepagestyle{preamble}{}{}{}{}{}{\pagemark}
+%Doku zu deftripstyle: scrguide.pdf
+\pagestyle{preamble}
+\renewcommand*{\chapterpagestyle}{preamble}
+\section*{Kurzfassung}
 \lipsum
 
 \section*{Abstract}
 \lipsum
 
+\foreignlanguage{english}{}
+
+\cleardoublepage
+
 \tableofcontents
-\makeatother
 \listoffigures
 \listoftables
-\cleardoublepage
-\renewcommand*{\chapterpagestyle}{scrplain}
-
-\pagenumbering{arabic}
 
 \chapter{Einleitung}
-\lipsum
-
-\chapter{Hauptteil}
+\pagenumbering{arabic}
 \lipsum\autocite{turing1936}
-
-\chapter{Zusammenfassung}
+\chapter{Hauptteil}
+\lipsum
+\chapter{Schluß}
 \lipsum
 
-\printbibliography[title=Literaturverzeichnis]
+\clearpage
 
-\backmatter 
+\printbibliography
+
+Alle URLs wurden zuletzt am 01.\,07.\,2018 geprüft.
+
 \pagestyle{empty}
 \renewcommand*{\chapterpagestyle}{empty}
 \Versicherung

@@ -1,14 +1,11 @@
 LATEXMK = latexmk
-LATEXMKOPTIONS = -pdf
+LATEXMKOPTIONS = -pdf -pdflatex=lualatex --shell-escape --enable-pipes
 
 MAIN = main
 
-$(MAIN).pdf: $(MAIN).tex
+$(MAIN).pdf: $(wildcard *.tex) Makefile
 	$(LATEXMK) $(LATEXMKOPTIONS) $(MAIN).tex
 
 .PHONY: clean
 clean:
 	$(LATEXMK) -c $(MAIN).tex
-	rm -f $(MAIN).bbl
-	rm -f $(MAIN).loa
-	rm -f $(MAIN).run.xml
